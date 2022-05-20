@@ -271,7 +271,9 @@ ashita.register_event('incoming_packet', function(id, size, data)
 					print(string.format('\31\200[\30\82Maestro\31\200]\31\130 Field theme: \30\70%s', songs[fieldSongID]));
 				end
 				packet[0x56 + 1] = math.fmod(fieldSongID, 256);
-				packet[0x58 + 1] = math.floor(fieldSongID / 256);
+				packet[0x57 + 1] = math.floor(fieldSongID / 256);
+				packet[0x58 + 1] = math.fmod(fieldSongID, 256);
+				packet[0x59 + 1] = math.floor(fieldSongID / 256);
 			end
 			-- Set field song, if any is configured
 			local battleSongID = config.zoneBGM[tostring(zoneID)].battleSongID;
@@ -280,7 +282,9 @@ ashita.register_event('incoming_packet', function(id, size, data)
 					print(string.format('\31\200[\30\82Maestro\31\200]\31\130 Battle theme: \30\70%s', songs[battleSongID]));
 				end
 				packet[0x5A + 1] = math.fmod(battleSongID, 256);
-				packet[0x5C + 1] = math.floor(battleSongID / 256);
+				packet[0x5B + 1] = math.floor(battleSongID / 256);
+				packet[0x5C + 1] = math.fmod(battleSongID, 256);
+				packet[0x5D + 1] = math.floor(battleSongID / 256);
 			end
 			return packet;
 		end
